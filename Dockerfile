@@ -13,4 +13,4 @@ ENV LOG_CHANNEL stderr
 # ALLOW COMPOSER TO INSTALL DEPENDENCIES
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-CMD ["/start.sh"]
+CMD php artisan migrate --force && /start.sh
