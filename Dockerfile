@@ -13,4 +13,7 @@ ENV LOG_CHANNEL stderr
 # ALLOW COMPOSER TO INSTALL DEPENDENCIES
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+# --- FIX PERMISSIONS ---
+RUN chmod -R 777 storage bootstrap/cache
+
 CMD ["/start.sh"]
