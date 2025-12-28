@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BusController;
 use App\Http\Controllers\AdminController;
-
+    
 // User pages
 Route::get('/', function () {
     return view('user.user');
@@ -39,5 +40,13 @@ Route::get('/live-bus-count', [BusController::class, 'liveBusCount']);
 
 Route::get('/bus-location', function () {
     return \App\Models\Bus::select('id', 'plate_number', 'latitude', 'longitude')->get();
+
+Route::get('/force-migrate', function () {
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        return 'Migration Success: <br>' . nl2br(Artisan::output());
+    } catch (\Exception $e) {
+        return 'Migration Failed: ' . $e->getMessage();
+    }
 });
 
